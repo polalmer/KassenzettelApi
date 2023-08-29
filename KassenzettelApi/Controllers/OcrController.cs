@@ -14,7 +14,7 @@ public class OcrController : ControllerBase
 
     [HttpPost("GetKassenzettelData")]
     [Consumes("multipart/form-data")]
-    public void AnalysePhoto(IFormFile file)
+    public string AnalysePhoto(IFormFile file)
     {
         MemoryStream memoryStream = new MemoryStream();
         file.CopyTo(memoryStream);
@@ -23,6 +23,7 @@ public class OcrController : ControllerBase
         Pix pix = Pix.LoadFromMemory(fileBytes);
         Page page = _engine.Process(pix);
 
-        Console.WriteLine();
+        string text = page.GetText();
+        return text;
     }
 };
