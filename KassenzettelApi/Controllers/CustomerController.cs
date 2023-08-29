@@ -11,4 +11,10 @@ public class CustomerController : ControllerBase
     {
         return "Hello world";
     }
+
+    [HttpGet("Token")]
+    public string GetToken(string username, string passwort)
+    {
+        return "Anmeldetoken";
+    }
 }

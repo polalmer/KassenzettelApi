@@ -12,12 +12,16 @@ public class OcrController : ControllerBase
         "deu",
         EngineMode.Default);
 
-    [HttpGet("GetKassenzettelData")]
-    public void AnalysePhoto()
+    [HttpPost("GetKassenzettelData")]
+    [Consumes("multipart/form-data")]
+    public void AnalysePhoto(IFormFile file)
     {
-        string imagePath = @"C:\Users\palzer\Desktop\Kassenzettelapp\BE\KassenzettelApi\KassenzettelApi\OcrFiles\BeispielKassenzettel.png";
-        Pix image = Pix.LoadFromFile(imagePath);
-        Page page = _engine.Process(image);
+        MemoryStream memoryStream = new MemoryStream();
+        file.CopyTo(memoryStream);
+        byte[] fileBytes = memoryStream.ToArray();
+
+        Pix pix = Pix.LoadFromMemory(fileBytes);
+        Page page = _engine.Process(pix);
 
         Console.WriteLine();
     }
