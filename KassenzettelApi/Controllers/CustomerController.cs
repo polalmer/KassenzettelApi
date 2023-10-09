@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using KassenzettelApi.Classes;
 
 namespace KassenzettelApi.Controllers;
 
@@ -19,7 +20,7 @@ public class CustomerController : ControllerBase
     }
 
     [HttpPost("Kassenzettel")]
-    public async CreateKassenZettel(Kassenzettel Kassenzettel)
+    public Kassenzettel CreateKassenZettel(Kassenzettel Kassenzettel)
     {
         //create Zettel in Db
         return Kassenzettel;
