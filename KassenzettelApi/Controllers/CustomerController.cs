@@ -17,4 +17,11 @@ public class CustomerController : ControllerBase
     {
         return "Anmeldetoken";
     }
+
+    [HttpPost("Kassenzettel")]
+    public async CreateKassenZettel(Kassenzettel Kassenzettel)
+    {
+        //create Zettel in Db
+        return Kassenzettel;
+    }
 }
