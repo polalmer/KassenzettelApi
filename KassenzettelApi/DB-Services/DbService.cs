@@ -9,18 +9,39 @@ public static class DbService
 
     private static readonly SqlConnection sqlConnection = new(connection);
 
-    public static void Add(Kassenzettel kassenzettel)
+    public static void ConnectToDb()
     {
         sqlConnection.Open();
+    }
 
+    /// <summary>
+    ///     Legt einen neuen Eintrag in der Db für den Kassenzettel an
+    /// </summary>
+    public static void Create(Kassenzettel kassenzettel)
+    {
         //Replace with real Table and Column
-        SqlCommand insertCommand = new("INSERT INTO Kassenzettel (Username, Email) VALUES (@Username, @Email)", sqlConnection);
+        throw new NotImplementedException();
+    }
 
-        insertCommand.Parameters.Add(new SqlParameter("Username", "john_doe"));
-        insertCommand.Parameters.Add(new SqlParameter("Email", "john@example.com"));
+    /// <summary>
+    ///     Holt den Kassenzettel mit allen includes aus der Db
+    /// </summary>
+    public static Kassenzettel GetKassenzettel(int id)
+    {
+        SqlCommand command = new($"SELECT * FROM Kassenzettel WHERE Id = {id}", sqlConnection);
 
-        insertCommand.ExecuteNonQuery();
+        var reader = command.ExecuteReader();
 
-        sqlConnection.Close();
+        reader.Read();
+
+        Kassenzettel kassenzettel = new()
+        {
+            Id = reader.GetInt32(0),
+            Shop = reader.GetString(1),
+        };
+
+        throw new NotImplementedException();
+
+        return kassenzettel;
     }
 }

@@ -11,7 +11,7 @@ public class ReceiptController : ControllerBase
     [HttpPost]
     public ActionResult<Kassenzettel> CreateKassenzettel(Kassenzettel Kassenzettel)
     {
-        DbService.Add(Kassenzettel);
+        throw new NotImplementedException();
         return Ok(Kassenzettel);
     }
 
