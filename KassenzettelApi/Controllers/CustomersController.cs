@@ -9,9 +9,8 @@ namespace KassenzettelApi.Controllers;
 public class CustomerController : ControllerBase
 {
     [HttpPost]
-    public Customer CreateCustomer([FromBody] Customer customer)
+    public void CreateCustomer()
     {
-        throw new NotImplementedException();
-        return customer;
+        DbService.Test();
     }
 }
