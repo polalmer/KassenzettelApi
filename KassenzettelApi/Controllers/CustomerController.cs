@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using KassenzettelApi.Classes;
+using KassenzettelApi.DB_Services;
 
 namespace KassenzettelApi.Controllers;
 
@@ -7,22 +8,19 @@ namespace KassenzettelApi.Controllers;
 [Route("[controller]")]
 public class CustomerController : ControllerBase
 {
-    [HttpGet("")]
-    public string Get()
+    private readonly DbService _DbService;
+
+    public CustomerController(DbService dbService)
     {
-        return "Hello world";
+        _DbService = dbService;
     }
 
-    [HttpGet("Token")]
-    public string GetToken(string username, string passwort)
-    {
-        return "Anmeldetoken";
-    }
 
     [HttpPost("Kassenzettel")]
     public Kassenzettel CreateKassenZettel(Kassenzettel Kassenzettel)
     {
         //create Zettel in Db
+        _DbService.Add(Kassenzettel);
         return Kassenzettel;
     }
 }

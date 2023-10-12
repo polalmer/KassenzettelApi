@@ -7,7 +7,7 @@ public class Kassenzettel
     [JsonIgnore]
     public int Id { get; set; }
 
-    public List<(int count,Item)> Items { get;} = new();
+    public List<Item>? Items { get; set; }
 
     public string? Shop { get; set; }
 }
