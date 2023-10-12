@@ -4,7 +4,6 @@ namespace KassenzettelApi.Classes;
 
 public class Item
 {
-    [JsonIgnore]
     public int Id { get; set; }
 
     public float Price { get; set; }

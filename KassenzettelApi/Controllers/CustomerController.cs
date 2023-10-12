@@ -17,10 +17,18 @@ public class CustomerController : ControllerBase
 
 
     [HttpPost("Kassenzettel")]
-    public Kassenzettel CreateKassenZettel(Kassenzettel Kassenzettel)
+    public ActionResult<Kassenzettel> CreateKassenZettel(Kassenzettel Kassenzettel)
     {
         //create Zettel in Db
         _DbService.Add(Kassenzettel);
-        return Kassenzettel;
+        return Ok(Kassenzettel);
+    }
+
+    [HttpGet("Kassenzettel")]
+    public ActionResult<Kassenzettel> GetKassenzettel([FromBody] int id)
+    {
+        //Get from DB
+        throw new NotImplementedException();
+        return Ok();
     }
 }
