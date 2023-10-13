@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using KassenzettelApi.Classes;
+using MySql.Data.MySqlClient;
 
 namespace KassenzettelApi.DB_Services;
 
@@ -15,8 +16,13 @@ public static class DbService
 
     public static void Test()
     {
-        string query = "CREATE TABLE TestTable(column1 int); ";
-        MySqlCommand command = new MySqlCommand(query, connection);
-        command.ExecuteNonQuery();     
+    }
+
+    public static Kassenzettel CreateKassenzettel(Kassenzettel kassenzettel)
+    {
+        string query = $"INSERT INTO Receipt(Shop,CustomerId) VALUES ({kassenzettel.Shop},{kassenzettel.Customer});";
+        MySqlCommand command = new(query, connection);
+        command.ExecuteNonQuery();
+        return kassenzettel;
     }
 }

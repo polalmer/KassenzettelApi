@@ -9,10 +9,10 @@ namespace KassenzettelApi.Controllers;
 public class ReceiptController : ControllerBase
 {
     [HttpPost]
-    public ActionResult<Kassenzettel> CreateKassenzettel(Kassenzettel Kassenzettel)
+    public ActionResult<Kassenzettel> CreateKassenzettel(Kassenzettel kassenzettel)
     {
-        throw new NotImplementedException();
-        return Ok(Kassenzettel);
+        kassenzettel = DbService.CreateKassenzettel(kassenzettel);
+        return Ok(kassenzettel);
     }
 
     [HttpGet("{id}")]
