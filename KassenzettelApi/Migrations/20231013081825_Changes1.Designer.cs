@@ -3,6 +3,7 @@ using System;
 using KassenzettelApi.DB_Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KassenzettelApi.Migrations
 {
     [DbContext(typeof(KassenzettelDbContext))]
-    partial class KassenzettelDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231013081825_Changes1")]
+    partial class Changes1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

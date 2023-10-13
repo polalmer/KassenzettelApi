@@ -25,7 +25,7 @@ public class ReceiptController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<Kassenzettel> GetKassenzettel([FromRoute] int id)
     {
-        Kassenzettel kassenzettel = dbService.GetKassenzettel(id);    
+        Kassenzettel? kassenzettel = dbService.GetKassenzettel(id);    
         return Ok(kassenzettel);
     }
 }

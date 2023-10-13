@@ -14,6 +14,15 @@ namespace KassenzettelApi.Migrations
             migrationBuilder.AlterDatabase()
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.DropTable(
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Receipts");
+
+            migrationBuilder.DropTable(
+                name: "Customers");
+
             migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
