@@ -28,7 +28,7 @@ public class CustomerController : ControllerBase
             Passwort = password
         };
 
-        dbService.CreateCustomer(customer);
+        customer = dbService.CreateCustomer(customer);
 
         return Ok(customer);
     }
@@ -37,5 +37,13 @@ public class CustomerController : ControllerBase
     public ActionResult<Customer> GetCustomer(int id)
     {
         return Ok(dbService.GetCustomer(id));
+    }
+
+    [HttpPost("{customer}/receipt")]
+    public ActionResult<Kassenzettel> CreateKassenzettel([FromRoute] int customer, [FromBody] KassenzettelDto kassenzettel)
+    {
+        Kassenzettel receipt = new(kassenzettel);
+        receipt = dbService.CreateKassenzettel(receipt);
+        return Ok(receipt);
     }
 }

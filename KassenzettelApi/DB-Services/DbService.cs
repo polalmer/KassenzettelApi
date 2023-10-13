@@ -7,24 +7,28 @@ public class DbService
 {
     private readonly KassenzettelDbContext context = new();
 
-    public void CreateKassenzettel(Kassenzettel kassenzettel)
+    public Kassenzettel CreateKassenzettel(Kassenzettel kassenzettel)
     {
         context.Receipts.Add(kassenzettel);
 
         context.SaveChanges();
+
+        return context.Receipts.Last();
     }
 
     public Kassenzettel? GetKassenzettel(int id)
     {
-        Kassenzettel? zettel = context.Receipts.Where(x => x.Id == id).FirstOrDefault();
+        Kassenzettel? zettel = context.Receipts.Include(x => x.Items).Where(x => x.Id == id).FirstOrDefault();
         return zettel;
     }
 
-    public void CreateCustomer(Customer customer)
+    public Customer CreateCustomer(Customer customer)
     {
         context.Customers.Add(customer);
 
         context.SaveChanges();
+
+        return context.Customers.Last();
     }
 
     public Customer? GetCustomer(int id)
