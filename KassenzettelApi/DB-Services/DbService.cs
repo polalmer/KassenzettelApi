@@ -13,7 +13,7 @@ public class DbService
 
         context.SaveChanges();
 
-        return context.Receipts.Last();
+        return kassenzettel;
     }
 
     public Kassenzettel? GetKassenzettel(int id)
@@ -28,12 +28,18 @@ public class DbService
 
         context.SaveChanges();
 
-        return context.Customers.Last();
+        return customer;
     }
 
     public Customer? GetCustomer(int id)
     {
-        Customer? customer = context.Customers.Include(c => c.Kassenzettel).Where(x => x.Id == id).FirstOrDefault();
+        Customer? customer = context.Customers.Include(c => c.Kassenzettel)
+            .ThenInclude(r => r.Items).Where(x => x.Id == id).FirstOrDefault();
         return customer;
+    }
+
+    public void Save(Customer customer)
+    {
+        context.SaveChanges();
     }
 }

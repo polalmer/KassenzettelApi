@@ -44,6 +44,14 @@ public class CustomerController : ControllerBase
     {
         Kassenzettel receipt = new(kassenzettel);
         receipt = dbService.CreateKassenzettel(receipt);
+
+        Customer? customerObj = dbService.GetCustomer(customer);
+        if (customerObj is not null)
+        {
+            customerObj.Kassenzettel.Add(receipt);
+            dbService.Save(customerObj);
+        }
+
         return Ok(receipt);
     }
 }
