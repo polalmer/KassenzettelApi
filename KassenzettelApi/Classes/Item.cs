@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace KassenzettelApi.Classes;
+﻿namespace KassenzettelApi.Classes;
 
 public class Item
 {
@@ -11,4 +9,6 @@ public class Item
     public float Price { get; set; }
 
     public string Name { get; set; } = string.Empty;
+
+    public Kassenzettel Kassenzettel { get; set; }
 }

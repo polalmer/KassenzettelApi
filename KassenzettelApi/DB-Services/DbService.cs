@@ -1,28 +1,28 @@
 ﻿using KassenzettelApi.Classes;
-using MySql.Data.MySqlClient;
 
 namespace KassenzettelApi.DB_Services;
 
-public static class DbService
+public class DbService
 {
-    private const string connectionString = "Server=192.168.88.251;Database=FI23Kassenzettel;Uid=jonas;Pwd=AFBB1622;";
+    private readonly KassenzettelDbContext context;
 
-    private static MySqlConnection connection = new(connectionString);
-
-    public static void ConnectToDb()
+    public DbService(KassenzettelDbContext kassenzettelDbContext)
     {
-        connection.Open();
+        context = kassenzettelDbContext;
     }
 
-    public static void Test()
+
+    public void CreateKassenzettel(Kassenzettel kassenzettel)
     {
+        context.Receipts.Add(kassenzettel);
+
+        context.SaveChanges();
     }
 
-    public static Kassenzettel CreateKassenzettel(Kassenzettel kassenzettel)
+    public Kassenzettel GetKassenzettel(int id)
     {
-        string query = $"INSERT INTO Receipt(Shop,CustomerId) VALUES ({kassenzettel.Shop},{kassenzettel.Customer});";
-        MySqlCommand command = new(query, connection);
-        command.ExecuteNonQuery();
-        return kassenzettel;
+        Kassenzettel? zettel = context.Receipts.Where(x => x.Id == id).FirstOrDefault();
+
+        return zettel;
     }
 }

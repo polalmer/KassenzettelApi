@@ -11,6 +11,6 @@ public class CustomerController : ControllerBase
     [HttpPost]
     public void CreateCustomer()
     {
-        DbService.Test();
+        throw new NotImplementedException();
     }
 }

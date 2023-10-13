@@ -8,18 +8,24 @@ namespace KassenzettelApi.Controllers;
 [Route("[controller]")]
 public class ReceiptController : ControllerBase
 {
-    [HttpPost]
-    public ActionResult<Kassenzettel> CreateKassenzettel(Kassenzettel kassenzettel)
+    private readonly DbService dbService;
+
+    public ReceiptController(DbService dbService)
     {
-        kassenzettel = DbService.CreateKassenzettel(kassenzettel);
+        this.dbService = dbService;
+    }
+
+    [HttpPost]
+    public ActionResult<Kassenzettel> CreateKassenzettel([FromBody]Kassenzettel kassenzettel)
+    {
+        dbService.CreateKassenzettel(kassenzettel);
         return Ok(kassenzettel);
     }
 
     [HttpGet("{id}")]
     public ActionResult<Kassenzettel> GetKassenzettel([FromRoute] int id)
     {
-        //Get from DB
-        throw new NotImplementedException();
-        return Ok();
+        Kassenzettel kassenzettel = dbService.GetKassenzettel(id);    
+        return Ok(kassenzettel);
     }
 }
